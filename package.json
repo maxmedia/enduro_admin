@@ -1,6 +1,6 @@
 {
   "name": "enduro_admin",
-  "version": "1.0.72",
+  "version": "1.0.73",
   "description": "",
   "main": "assets/vendor/enduro/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "casper-chai": "^0.3.0",
     "casperjs": "^1.1.4",
     "chai": "^4.0.2",
-    "enduro": "1.4.24",
+    "enduro": "github:maxmedia/Enduro#v1.4.45.mxm",
     "glob": "^7.1.2",
     "jsdom": "^11.0.0",
     "mocha": "^3.4.2",
