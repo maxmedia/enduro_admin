@@ -14,7 +14,7 @@
     "casper-chai": "^0.3.0",
     "casperjs": "^1.1.4",
     "chai": "^4.0.2",
-    "enduro": "github:maxmedia/Enduro#v1.4.45.mxm",
+    "enduro": "github:maxmedia/Enduro#v1.4.45.mxm.1",
     "glob": "^7.1.2",
     "jsdom": "^11.0.0",
     "mocha": "^3.4.2",
