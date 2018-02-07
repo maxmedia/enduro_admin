@@ -2,7 +2,7 @@ enduro_admin_app.factory('extension_service', ['$http', 'url_config', '$cookies'
 	var extension_service = {}
 
 	extension_service.inject = function (username, password) {
-		return $http.get(url_config.get_base_url() + 'get_admin_extensions', {params: {sid: $cookies.get('sid')}})
+		return $http.get(url_config.get_base_url() + 'get_admin_extensions')
 			.then(function (res) {
 				if (res.data && res.data.success) {
 					for (r in res.data.data) {

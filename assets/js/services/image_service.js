@@ -6,7 +6,6 @@ enduro_admin_app.factory('image_service', ['url_config', '$cookies', '$q', 'Uplo
 			Upload.upload({
 				url: url_config.get_base_url() + 'img_upload',
 				data: {
-					sid: $cookies.get('sid'),
 					file: file
 				}
 			}).then(function (res) {

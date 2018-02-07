@@ -4,7 +4,6 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 	service.login_by_password = function (username, password) {
 		return $http.get(url_config.get_base_url() + 'login_by_password', {params: {username: username, password: password}})
 			.then(function (res) {
-				$cookies.put('sid', res.data.sid)
 				return res.data
 			}, function () {
 				return console.log('error logging in')
@@ -12,20 +11,11 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 	}
 
 	service.is_logged_in = function () {
-		// refuse login if no cookie is set
-		if (!$cookies.get('sid')) {
-			return $q.reject(false)
-		}
-		return $http.get(url_config.get_base_url() + 'check_session', {params: {sid: $cookies.get('sid')}})
+		return $http.get(url_config.get_base_url() + 'check_session')
 	}
 
 	service.logout = function () {
-		// refuse login if no cookie is set
-		if (!$cookies.get('sid')) {
-			return $q.reject(false)
-		}
-
-		return $http.get(url_config.get_base_url() + 'logout', {params: {sid: $cookies.get('sid')}})
+		return $http.get(url_config.get_base_url() + 'logout')
 	}
 
 	service.error = function (err) {
