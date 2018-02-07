@@ -11,7 +11,12 @@ enduro_admin_app.controller('folder_controller', ['$scope', 'menu_cache', '$root
 	}
 
 	$scope.add_page = function () {
-		$rootScope.adding_generator = $scope.page
+		if (!/^\/generators/.test($scope.page.fullpath)) {
+			$rootScope.adding_generator = $scope.page[$scope.page.slug]
+		} else {
+			$rootScope.adding_generator = $scope.page
+		}
+
 		$rootScope.modal = '/admin/modals/add_page_modal/index.html'
 	}
 
