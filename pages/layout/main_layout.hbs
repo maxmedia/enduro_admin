@@ -25,20 +25,20 @@
 			<div class="userbox-bar">
 				{{!-- push / cloud save button --}}
 				<a ng-click="push()" ng-if="settings.juicebox_enabled" ng-mouseenter="toggle_updated_files(true)" ng-mouseleave="toggle_updated_files(false)">
-					<i class="fa fa-cloud"></i>
+					<i class="fa fa-cloud-upload"></i>
 					<div class="bubble" ng-show="outstanding_changes.differences">\{{outstanding_changes.differences}}</div>
 				</a>
-				<a ngtooltipster title="Enable juicebox to back up your content" ng-if="!settings.juicebox_enabled" class="disabled"><i class="fa fa-cloud"></i></a>
+				<a ngtooltipster title="Enable juicebox to back up your content" ng-if="!settings.juicebox_enabled" class="disabled"><i class="fa fa-cloud-upload"></i></a>
 
 				{{!-- pull / check if anything is new in the cloud button --}}
-				<a ng-click="pull()" ngtooltipster title="See if there is newer content in the cloud" ng-if="settings.juicebox_enabled"><i class="fa fa-refresh"></i></a>
-				<a ngtooltipster title="Enable juicebox to back up your content" ng-if="!settings.juicebox_enabled" class="disabled"><i class="fa fa-refresh"></i></a>
+				<a ng-click="pull()" ngtooltipster title="See if there is newer content in the cloud" ng-if="settings.juicebox_enabled"><i class="fa fa-cloud-download"></i></a>
+				<a ngtooltipster title="Enable juicebox to back up your content" ng-if="!settings.juicebox_enabled" class="disabled"><i class="fa fa-cloud-download"></i></a>
 
 				{{!-- admin settings button --}}
 				<a href="#/cms/.settings" ngtooltipster title="Page settings"><i class="fa fa-cog"></i></a>
 
 				{{!-- logout button --}}
-				<a ng-click="logout()" ngtooltipster title="Logout"><i class="fa fa-power-off"></i></a>
+				<a ng-click="logout()" ngtooltipster title="Logout"><i class="fa fa-sign-out"></i></a>
 			</div>
 		</div>
 
