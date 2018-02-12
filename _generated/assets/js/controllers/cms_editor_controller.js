@@ -121,6 +121,10 @@ enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$
 			$rootScope.modal = '/admin/modals/delete_page_modal/index.html'
 		}
 
+		$scope.rename_current_page = function () {
+			$rootScope.modal = '/admin/modals/rename_page_modal/index.html'
+		}
+
 		// decides if the application is demo
 		$scope.is_demo = $rootScope.user.tags && $rootScope.user.tags.indexOf('demo') + 1
 

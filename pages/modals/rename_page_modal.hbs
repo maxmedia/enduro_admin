@@ -1,0 +1,18 @@
+<div class="rename_page_modal modal" en-modal ng-controller="renamepage_controller">
+	<form class="modal-body" ng-submit="renamepage()">
+		<div class="close-button" ng-click="close()"></div>
+
+		<div class="row">
+			<div class="form-control col-md-12">
+				<label>
+					<span>Page name</span>
+					<input class="page_name" ng-model="new_pagename">
+				</label>
+			</div>
+
+		</div>
+
+		<button type="submit" class="btn rename-page-button">Rename</button>
+
+	</form>
+</div>

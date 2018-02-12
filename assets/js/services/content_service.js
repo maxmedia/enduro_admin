@@ -92,6 +92,18 @@ enduro_admin_app.factory('content_service', function user_service ($http, url_co
 	}
 
 	// * ———————————————————————————————————————————————————————— * //
+	// * 	rename page
+	// * ———————————————————————————————————————————————————————— * //
+	content_service.rename_page = function (pagename, new_pagename) {
+		return $http.get(url_config.get_base_url() + 'rename_page', {
+			params: {
+				pagename: pagename,
+				new_pagename: new_pagename
+			}
+		})
+	}
+
+	// * ———————————————————————————————————————————————————————— * //
 	// * 	get outstanding changes
 	// * ———————————————————————————————————————————————————————— * //
 	content_service.update_outstanding_changes = function () {
