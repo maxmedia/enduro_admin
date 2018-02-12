@@ -118,13 +118,7 @@ enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$
 		// *	returns nothing
 		// * ———————————————————————————————————————————————————————— * //
 		$scope.delete_current_page = function () {
-			content_service.delete_page($rootScope.current_page)
-				.then(function (res) {
-					console.log(res)
-				})
-
-			// delete page from the cmslist
-			// console.log($rootScope.cmslist)
+			$rootScope.modal = '/admin/modals/delete_page_modal/index.html'
 		}
 
 		// decides if the application is demo
