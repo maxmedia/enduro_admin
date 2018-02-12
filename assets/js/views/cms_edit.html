@@ -5,7 +5,7 @@
 			<i class="fa fa-search"></i>
 			<div ng-include="'/admin/components/page_search/page_search_results/index.html'"></div>
 		</div>
-		<div class="btn btn-minor small publish-button" ng-click="temp()" ng-class="{'publishing': temping}" ng-if="has_page_associated"><i class="fa fa-bolt"></i>Preview</div>
+		<div class="btn btn-minor small publish-button" ng-click="temp()" ng-class="{'publishing': temping}" disabled="!has_page_associated"><i class="fa fa-bolt"></i>Preview</div>
 		<div class="btn btn-success small publish-button" ng-click="publish()" ng-class="{'publishing': publishing, 'disabled': is_demo}"><i class="fa fa-cogs"></i>Publish</div>
 	</div>
 	<div class="page-viewport">
