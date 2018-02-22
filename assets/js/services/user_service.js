@@ -18,8 +18,7 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 		return $http.get(url_config.get_base_url() + 'logout')
 	}
 
-	service.error = function (err) {
-
+	service.error_without_reject = function (err) {
 		// session expired
 		if (err.status == 401) {
 			open_login_modal()
@@ -29,8 +28,6 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 		if (err.status == 403) {
 			open_no_rights_modal()
 		}
-
-		return $q.reject(false)
 	}
 
 	function open_login_modal () {
@@ -43,6 +40,11 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 		if (!$rootScope.modal) {
 			$rootScope.modal = '/admin/modals/no_rights_modal/index.html'
 		}
+	}
+
+	service.error = function (err) {
+		service.error_without_reject(err)
+		return $q.reject(false)
 	}
 
 	return service

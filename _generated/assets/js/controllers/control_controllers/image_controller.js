@@ -25,6 +25,9 @@ enduro_admin_app.controller('image_controller', function ($scope, image_service,
 				.then(function (image_url) {
 					$scope.context[$scope.terminatedkey] = image_url
 					$timeout(function () { $scope.loading = false }, 500)
+				}, function () {
+					$scope.context[$scope.terminatedkey] = ''
+					$timeout(function () { $scope.loading = false }, 500)
 				})
 		}, 250)
 	}

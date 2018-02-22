@@ -9,16 +9,15 @@ enduro_admin_app.factory('image_service', ['url_config', '$cookies', '$q', 'Uplo
 					file: file
 				}
 			}).then(function (res) {
-				if (res.data.success) {
-					console.log('uploaded', res.data.image_url)
-					resolve(res.data.image_url)
-				} else {
-					console.log(res)
-					console.log('upload not successfull')
-					reject()
+				if (!res.data.success || !res.data.image_url) {
+					return reject(new Error('upload not successfull ' + res.data))
 				}
-			},
-			user_service.error)
+				console.log('uploaded', res.data.image_url)
+				resolve(res.data.image_url)
+			}, function (res) {
+				user_service.error_without_reject(res)
+				reject(new Error('upload failed'))
+			})
 		})
 	}
 
