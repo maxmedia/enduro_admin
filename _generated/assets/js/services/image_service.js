@@ -15,8 +15,11 @@ enduro_admin_app.factory('image_service', ['url_config', '$cookies', '$q', 'Uplo
 				console.log('uploaded', res.data.image_url)
 				resolve(res.data.image_url)
 			}, function (res) {
-				user_service.error_without_reject(res)
-				reject(new Error('upload failed'))
+				var err = new Error('upload failed')
+				err.status = res.status
+				err.statusText = res.statusText
+				err.data = res.data
+				reject(err)
 			})
 		})
 	}
