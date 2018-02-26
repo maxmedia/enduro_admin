@@ -10,6 +10,8 @@ enduro_admin_app.factory('modal_service', function modal_service ($rootScope, $q
 	modal_service.close = function () {
 		$('body').removeClass('modal-open')
 		$rootScope.modal = ''
+		$rootScope.error_modal_title = null
+		$rootScope.error_modal_message = null
 	}
 
 	modal_service.open = function (modal_name) {
@@ -24,6 +26,12 @@ enduro_admin_app.factory('modal_service', function modal_service ($rootScope, $q
 				}
 			})
 		})
+	}
+
+	modal_service.openError = function (title, message) {
+		$rootScope.error_modal_title = title
+		$rootScope.error_modal_message = message
+		return this.open('error_modal')
 	}
 
 	return modal_service
