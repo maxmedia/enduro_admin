@@ -2,7 +2,7 @@ enduro_admin_app.factory('menu_cache', function ($cacheFactory) {
 	return $cacheFactory('mainmenu_data')
 })
 
-enduro_admin_app.factory('content_service', function user_service ($http, url_config, $cookies, menu_cache, $q, user_service, $rootScope) {
+enduro_admin_app.factory('content_service', function user_service ($http, url_config, $cookies, menu_cache, $q, user_service, modal_service, $rootScope) {
 	var content_service = {}
 
 	content_service.get_cms_list = function (username, password) {
@@ -29,6 +29,38 @@ enduro_admin_app.factory('content_service', function user_service ($http, url_co
 			.then(function (res) {
 				return res.data
 			}, user_service.error)
+	}
+
+	content_service.get_publish_status = function () {
+		return $http.get(url_config.get_base_url() + 'publish_status')
+			.then(function (res) {
+				if (!res.data.success) {
+					throw new Error('Failed to get publish status')
+				}
+				return res.data
+			}, function (err) {
+				if (err.status !== 401 && err.status !== 403) {
+					console.error(err)
+					return modal_service.openError('Something went wrong')
+				}
+				return user_service.error(err)
+			})
+	}
+
+	content_service.publish = function (actions) {
+		return $http.post(url_config.get_base_url() + 'publish', { actions: actions })
+			.then(function (res) {
+				if (!res.data.success) {
+					throw new Error('Failed to publish')
+				}
+				return res.data
+			}, function (err) {
+				if (err.status !== 401 && err.status !== 403) {
+					console.error(err)
+					return modal_service.openError('Something went wrong')
+				}
+				return user_service.error(err)
+			})
 	}
 
 	content_service.save_content = function (page_path, content) {

@@ -2,8 +2,8 @@
 // * 	cms editor controller
 // *	main controller for cms editor
 // * ———————————————————————————————————————————————————————— * //
-enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$routeParams', 'content_service', 'culture_service', 'hotkeys',
-	function ($scope, $rootScope, $routeParams, content_service, culture_service, hotkeys) {
+enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$routeParams', 'content_service', 'culture_service', 'hotkeys', 'modal_service',
+	function ($scope, $rootScope, $routeParams, content_service, culture_service, hotkeys, modal_service) {
 
 		// get page specified in route
 		content_service.get_content($rootScope.current_page)
@@ -75,15 +75,32 @@ enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$
 		// *
 		// *	returns nothing
 		// * ———————————————————————————————————————————————————————— * //
-		$scope.publish = function () {
-			$scope.publishing = true
+		$scope.save = function () {
+			$scope.saving = true
 
 			content_service.save_content($rootScope.current_page, $scope.context)
 				.then(function () {
 					content_service.update_outstanding_changes()
-					$scope.publishing = false
+					$scope.saving = false
 				}, function () {
 					console.log('something went wrong with saving the data')
+					$scope.saving = false
+				})
+		}
+
+		// * ———————————————————————————————————————————————————————— * //
+		// * 	change culture
+		// *	saves context
+		// *
+		// *	returns nothing
+		// * ———————————————————————————————————————————————————————— * //
+		$scope.publish = function () {
+			$scope.publishing = true
+
+			modal_service.open('publishing_modal')
+				.then(function () {
+					$scope.publishing = false
+				}, function () {
 					$scope.publishing = false
 				})
 		}

@@ -1,0 +1,61 @@
+<div ng-controller="publishing_controller" class="modal" en-modal>
+	<div class="modal-body publishing">
+		<h2>
+			Publish site
+			<small class="loading" ng-if="loading">
+				Loading...
+				<i class="fa fa-refresh fa-pulse"></i>
+			</small>
+
+			{{! <i class="fa fa-refresh" ng-class="{ 'fa-pulse': loading, hidden: !loading }"></i> }}
+		</h2>
+
+		{{!TODO no actions message }}
+
+		<ul class="publish-list">
+			<li
+				ng-repeat="a in actions"
+				ng-class="action_item_classes(a)"
+			>
+
+				<i class="fa fa-check" ng-if="a.noaction" title="No action"></i>
+				<i class="fa fa-exchange" ng-if="a.put" title="Update"></i>
+				<i class="fa fa-plus" ng-if="a.new" title="New"></i>
+				<i class="fa fa-minus-square" ng-if="a.delete" title="Delete"></i>
+
+				<a ng-href="/\{{a.path_nice}}" target="_blank" ng-if="!a.delete">
+					\{{a.path_nice}}
+					<i class="fa fa-external-link"></i>
+				</a>
+
+				<span ng-if="a.delete">\{{a.path_nice}}</span>
+			</li>
+		</ul>
+
+		{{!TODO show/hide asset items}}
+		{{!TODO show/hide noaction items}}
+
+		<div class="wedge"></div>
+
+		{{!TODO don't show publish if no actions }}
+		<div class="controls-1" ng-if="!confirming">
+			<div class="publish-button btn" ng-click="confirm_publish()">Publish</div>
+			<div class="cancel-button btn" ng-click="close()">Cancel</div>
+		</div>
+
+		<div class="controls-2" ng-if="confirming">
+			<div class="warning">
+				<p>
+					Are you sure you want to publish?<br />
+					This action is not reversible.
+				</p>
+			</div>
+			<div class="publish-button btn" ng-click="publish()">
+				Publish
+				<i class="fa fa-gear fa-pulse" ng-class="{ 'hidden': !publishing }"></i>
+			</div>
+			<div class="cancel-button btn" ng-click="confirm_cancel()">Cancel</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>

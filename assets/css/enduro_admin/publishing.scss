@@ -1,0 +1,82 @@
+.publishing {
+  h2 small.loading {
+    font-style: italic;
+    text-transform: uppercase;
+    @include font-size(sm);
+    padding-left: 0.5em;
+
+    i.fa-refresh {
+      margin-left: 0.5em;
+    }
+  }
+
+  .publish-list {
+    li {
+      @include font-size(xs);
+
+      i {
+        width: 1.2em;
+      }
+
+      a, span {
+        font-family: Courier, "Courier New", monospace;
+      }
+
+      a {
+        .fa { display: none; }
+        &:hover {
+          .fa { display: inline-block; }
+        }
+      }
+
+      i.fa, a i.fa {
+        font-weight: normal;
+        color: #000;
+        font-variant: normal;
+      }
+
+      &.is-asset {
+        display: none;
+      }
+
+      &.publish-noaction {
+        display: none;
+        a {
+          color: #999;
+        }
+      }
+      &.publish-put a {
+        font-weight: bold;
+      }
+      &.publish-new a {
+        font-weight: bold;
+        color: #090;
+      }
+      &.publish-delete span {
+        font-style: italic;
+        color: #f00;
+      }
+    }
+  }
+
+  .controls-2 {
+    div.warning {
+      float: left;
+      p {
+        @include font-size(sm);
+        font-weight: bold;
+        color: #f00;
+        margin-bottom: 0;
+      }
+    }
+    .publish-button, .cancel-button {
+      // text-align: right;
+      float: right;
+      margin: {
+        left: 0.5em;
+        right: 0.5em;
+        bottom: 0;
+      }
+    }
+  }
+}
