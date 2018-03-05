@@ -34,8 +34,15 @@ enduro_admin_app.factory('content_service', function user_service ($http, url_co
 	content_service.save_content = function (page_path, content) {
 		return $http.post(url_config.get_base_url() + 'save_cms', {content: content, filename: page_path})
 			.then(function (res) {
-				return $q.resolve(res)
-			}, user_service.error)
+				return res
+			}, function (err) {
+				if (err.status == 422) {
+					return modal_service.openError('Unable to save content',
+						'Another user made a potentially conflicting change to the content')
+				}
+				console.error(err)
+				return user_service.error(err)
+			})
 	}
 
 	content_service.get_globalized_options = function (globalizer_string) {
