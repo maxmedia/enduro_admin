@@ -1,4 +1,4 @@
-enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q', '$rootScope', function user_service ($http, url_config, $cookies, $q, $rootScope) {
+enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q', '$rootScope', 'modal_service', function user_service ($http, url_config, $cookies, $q, $rootScope, modal_service) {
 	var service = {}
 
 	service.login_by_password = function (username, password) {
@@ -21,25 +21,15 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 	service.error_without_reject = function (err) {
 		// session expired
 		if (err.status == 401) {
-			open_login_modal()
+			return modal_service.open('login_modal')
 		}
 
 		// does not have enough access rights
 		if (err.status == 403) {
-			open_no_rights_modal()
+			return modal_service.open('no_rights_modal')
 		}
-	}
 
-	function open_login_modal () {
-		if (!$rootScope.modal) {
-			$rootScope.modal = '/admin/modals/login_modal/index.html'
-		}
-	}
-
-	function open_no_rights_modal () {
-		if (!$rootScope.modal) {
-			$rootScope.modal = '/admin/modals/no_rights_modal/index.html'
-		}
+		return $q.reject(err)
 	}
 
 	service.error = function (err) {
