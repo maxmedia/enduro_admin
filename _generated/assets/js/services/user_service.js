@@ -37,5 +37,33 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 		return $q.reject(false)
 	}
 
+	service.change_password = function (new_password) {
+		return $http.put(url_config.get_base_url() + 'users/' + $rootScope.user.username, {
+			password: new_password
+		})
+			.then(function (res) {
+				if (!res.data.success) throw new Error('Failed to change password')
+				return res.data.user
+			}, function (err) {
+				return user_service.error(err).catch(function () {
+					console.error(err)
+					return modal_service.openError('Something went wrong')
+				})
+
+				// return user_service.error(err).then(function (result) {
+				// 	return result
+				// }, function () {
+				// 	console.error(err)
+				// 	return modal_service.openError('Something went wrong')
+				// })
+
+				// if (err.status !== 401 && err.status !== 403) {
+				// 	console.error(err)
+				// 	return modal_service.openError('Something went wrong')
+				// }
+				// return user_service.error(err)
+			})
+	}
+
 	return service
 }])

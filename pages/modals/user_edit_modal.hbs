@@ -1,0 +1,54 @@
+<div ng-controller="user_edit_controller" class="modal" en-modal>
+	<div class="modal-body user-edit">
+		<h2>Change Password</h2>
+
+		<div class="success" ng-if="success">
+			<div class="wedge"></div>
+			<p>Your password was successfully changed.</p>
+			<div class="btn" ng-click="close()">Close</div>
+		</div>
+
+		<form ng-submit="save()" ng-if="!success">
+			{{!TODO change username }}
+
+			<div class="form-row">
+				<label class="login-textfield-label">
+					<input
+						ng-model="password"
+						ng-minlength="6"
+						class="enduro_password"
+						type="password"
+						required
+						autofocus
+						tabindex="1">
+					<span>Enter new password</span>
+				</label>
+			</div>
+
+			<div class="form-row">
+				<label class="login-textfield-label">
+					<input
+						ng-model="password_confirm"
+						ng-change="verify_password_confirmed()"
+						class="enduro_password"
+						ng-class="{ unconfirmed: !confirmed }"
+						type="password"
+						required
+						tabindex="2">
+					<span>Confirm password</span>
+				</label>
+			</div>
+
+			<div class="form-row">
+				<div class="wedge"></div>
+				<button id="submit" type="submit" class="btn" tabindex="3" ng-disabled="!confirmed">
+					Save
+					<i class="fa fa-gear fa-pulse" ng-class="{ 'hidden': !saving }"></i>
+				</button>
+				<div class="cancel-button btn" ng-click="close()">Cancel</div>
+			</div>
+
+			<div class="clearfix"></div>
+		</form>
+	</div>
+</div>
