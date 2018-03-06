@@ -1,14 +1,7 @@
 .user-edit {
-  // label.unconfirmed {
-  //   color: red;
-  // }
   input.ng-invalid, input.unconfirmed {
     border-bottom-color: red;
   }
-  // input.unconfirmed {
-  //   border-bottom-color: red;
-  //   color: red;
-  // }
   button[disabled] {
     background-color: #ccc;
   }

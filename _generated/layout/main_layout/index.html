@@ -92,10 +92,19 @@
 					<i class="fa fa-cloud-upload"></i>
 					<div class="bubble" ng-show="outstanding_changes.differences">{{outstanding_changes.differences}}</div>
 				</a>
-				<a ngtooltipster title="Enable juicebox to back up your content" ng-if="!settings.juicebox_enabled" class="disabled"><i class="fa fa-cloud-upload"></i></a>
 
 				<a ng-click="pull()" ngtooltipster title="See if there is newer content in the cloud" ng-if="settings.juicebox_enabled"><i class="fa fa-cloud-download"></i></a>
-				<a ngtooltipster title="Enable juicebox to back up your content" ng-if="!settings.juicebox_enabled" class="disabled"><i class="fa fa-cloud-download"></i></a>
+
+				<a ng-click="edit_user()" ng-if="!settings.juicebox_enabled">
+					<i class="fa fa-user"></i>
+				</a>
+				<a
+					ng-click="manage_users()"
+					ng-if="!settings.juicebox_enabled"
+					ng-disabled="!$rootScope.user.tags.includes('admin')"
+					<i class="fa fa-users"></i>
+				</a>
+
 
 				<a href="#/cms/.settings" ngtooltipster title="Page settings"><i class="fa fa-cog"></i></a>
 

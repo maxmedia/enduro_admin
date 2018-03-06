@@ -37,9 +37,15 @@
 				padding: 0 1px;
 			}
 
-			&.disabled {
+			&.disabled, &[disabled] {
+				cursor: default;
+
 				i {
 					color: $light-grey;
+				}
+
+				&:hover, &:focus {
+					border-bottom: none;
 				}
 			}
 		}

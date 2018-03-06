@@ -1,7 +1,7 @@
 // * ———————————————————————————————————————————————————————— * //
 // * 	userbox controller
 // * ———————————————————————————————————————————————————————— * //
-enduro_admin_app.controller('userbox_controller', function ($scope, user_service, $location, juice_service) {
+enduro_admin_app.controller('userbox_controller', function ($scope, user_service, $location, juice_service, modal_service) {
 
 	$scope.logout = function () {
 		user_service.logout()
@@ -26,6 +26,15 @@ enduro_admin_app.controller('userbox_controller', function ($scope, user_service
 
 	$scope.toggle_updated_files = function (toggle) {
 		$scope.$parent.show_updated_files = toggle
+	}
+
+	$scope.edit_user = function () {
+		return modal_service.open('user_edit_modal')
+	}
+
+	$scope.manage_users = function () {
+		return modal_service.open('user_manager_modal')
+
 	}
 
 })
