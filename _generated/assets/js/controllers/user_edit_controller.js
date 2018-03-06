@@ -5,7 +5,7 @@ enduro_admin_app.controller('user_edit_controller', function ($scope, $rootScope
 	$scope.success = false
 
 	$scope.verify_password_confirmed = function () {
-		if ($scope.password === $scope.password_confirm) {
+		if ($scope.password && $scope.password === $scope.password_confirm) {
 			$scope.confirmed = true
 		} else {
 			$scope.confirmed = false
