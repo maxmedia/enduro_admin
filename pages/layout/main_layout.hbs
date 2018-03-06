@@ -34,14 +34,24 @@
 				<a ng-click="pull()" ngtooltipster title="See if there is newer content in the cloud" ng-if="settings.juicebox_enabled"><i class="fa fa-cloud-download"></i></a>
 				{{! <a ngtooltipster title="Enable juicebox to back up your content" ng-if="!settings.juicebox_enabled" class="disabled"><i class="fa fa-cloud-download"></i></a> }}
 
-				{{!-- User edit & manage buttons --}}
-				<a ng-click="edit_user()" ng-if="!settings.juicebox_enabled">
+				{{! User edit button }}
+				<a
+					ng-click="edit_user()"
+					ng-if="!settings.juicebox_enabled"
+					ngtooltipster
+					title="My User"
+				>
 					<i class="fa fa-user"></i>
 				</a>
+
+				{{! Manage Users button }}
 				<a
 					ng-click="manage_users()"
 					ng-if="!settings.juicebox_enabled"
 					ng-disabled="!$rootScope.user.tags.includes('admin')"
+					ngtooltipster
+					title="Manage Users"
+				>
 					<i class="fa fa-users"></i>
 				</a>
 
