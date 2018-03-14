@@ -79,7 +79,10 @@ enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$
 			$scope.saving = true
 
 			content_service.save_content($rootScope.current_page, $scope.context)
-				.then(function () {
+				.then(function (new_context) {
+					if (new_context) {
+						$scope.context = new_context
+					}
 					content_service.update_outstanding_changes()
 					$scope.saving = false
 				}, function () {

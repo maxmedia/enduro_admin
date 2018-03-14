@@ -65,8 +65,8 @@ enduro_admin_app.factory('content_service', function user_service ($http, url_co
 
 	content_service.save_content = function (page_path, content) {
 		return $http.post(url_config.get_base_url() + 'save_cms', {content: content, filename: page_path})
-			.then(function (res) {
-				return res
+			.then(function (data) {
+				return data.data
 			}, function (err) {
 				if (err.status == 422) {
 					return modal_service.openError('Unable to save content',
