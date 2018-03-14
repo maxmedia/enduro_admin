@@ -2,6 +2,7 @@ enduro_admin_app.controller('publishing_controller', function ($scope, content_s
 	$scope.loading = true
 	$scope.publishing = false
 	$scope.confirming = false
+	$scope.success = false
 
 	content_service.get_publish_status()
 		.then(function (data) {
@@ -53,11 +54,13 @@ enduro_admin_app.controller('publishing_controller', function ($scope, content_s
 	$scope.publish = function () {
 		var self = this
 
+		$scope.confirming = false
 		$scope.publishing = true
 
 		content_service.publish($scope.actions_orig)
 			.then(function () {
-				self.close()
+				$scope.publishing = false
+				$scope.success = true
 			}, function () {
 				self.close()
 			})

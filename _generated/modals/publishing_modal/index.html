@@ -9,8 +9,14 @@
 
 		</h2>
 
+		<div class="success" ng-if="success">
+			<div class="wedge"></div>
+			<p>The site was successfully published.</p>
+			<div class="btn" ng-click="close()">Close</div>
+		</div>
 
-		<ul class="publish-list">
+
+		<ul class="publish-list" ng-hide="success">
 			<li
 				ng-repeat="a in actions"
 				ng-class="action_item_classes(a)"
@@ -31,14 +37,14 @@
 		</ul>
 
 
-		<div class="wedge"></div>
-
-		<div class="controls-1" ng-if="!confirming">
+		<div class="controls-1" ng-if="!confirming && !success">
+			<div class="wedge"></div>
 			<div class="publish-button btn" ng-click="confirm_publish()">Publish</div>
 			<div class="cancel-button btn" ng-click="close()">Cancel</div>
 		</div>
 
 		<div class="controls-2" ng-if="confirming">
+			<div class="wedge"></div>
 			<div class="warning">
 				<p>
 					Are you sure you want to publish?<br />
