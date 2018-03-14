@@ -1,0 +1,187 @@
+<div ng-controller="user_manager_controller" class="modal" en-modal>
+	<div class="modal-body user-manager">
+		<div class="close-button" ng-click="close()" ng-if="!editing_user && !new_user"></div>
+
+		<h2 ng-if="!editing_user && !new_user">
+			Manage Users
+			<small class="loading" ng-if="loading">
+				Loading...
+				<i class="fa fa-refresh fa-pulse"></i>
+			</small>
+			<i
+				ng-if="!loading"
+				class="fa fa-user-plus"
+				ng-click="add_user()"
+				ngtooltipster
+				title="Add user"
+			></i>
+		</h2>
+		<h2 ng-if="editing_user">
+			Edit User <tt>{{editing_user.username}}</tt>
+			<small class="loading" ng-if="loading">
+				Loading...
+				<i class="fa fa-refresh fa-pulse"></i>
+			</small>
+		</h2>
+		<h2 ng-if="new_user">Add User</h2>
+
+		<div class="confirmation" ng-if="confirming_delete">
+			<div class="wedge"></div>
+			<div class="warning">
+				<p>
+					Are you sure you want to delete the user
+					<span class="username">{{username}}</span>?<br />
+					This action is not reversible.
+				</p>
+			</div>
+			<div class="cancel-button btn" ng-click="delete_cancel()">Cancel</div>
+			<div class="delete-button btn" ng-click="delete_user()">
+				Delete
+				<i class="fa fa-gear fa-pulse" ng-class="{ 'hidden': !deleting }"></i>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<form class="edit-user" ng-submit="save()" ng-if="editing_user">
+			<div class="wedge"></div>
+
+			<input type="hidden" ng-model="editing_user.username" />
+
+			<h3>Roles</h3>
+
+			<label class="checkboxfield-label">
+				<input
+				  type="checkbox"
+					ng-model="editing_user_tags.publisher"
+					ng-true-value="'publisher'"
+				>
+				<span>Publisher</span>
+			</label>
+
+			<label class="checkboxfield-label">
+				<input
+					type="checkbox"
+					ng-model="editing_user_tags.admin"
+					ng-true-value="'admin'"
+				>
+				<span>Admin</span>
+			</label>
+
+			<div class="clearfix"></div>
+			<div class="wedge"></div>
+			<div class="submit-button btn" ng-click="edit_user_submit()">
+				Submit
+				<i class="fa fa-gear fa-pulse" ng-class="{ 'hidden': !editing }"></i>
+			</div>
+			<div class="cancel-button btn" ng-click="edit_user_cancel()">Cancel</div>
+		</form>
+
+		<form class="add-user" ng-submit="save()" ng-if="new_user">
+			<div class="wedge"></div>
+
+			<div class="form-row">
+				<label class="textfield-label">Username</label>
+				<input
+					ng-model="new_user.username"
+					ng-minlength="6"
+					type="text"
+					required
+					autofocus
+					tabindex="1">
+				</label>
+			</div>
+
+			<div class="form-row">
+				<label class="textfield-label">Password</label>
+				<input
+					ng-model="new_user.password"
+					ng-minlength="6"
+					type="password"
+					required
+					tabindex="2">
+				</label>
+			</div>
+
+			<h3>Roles</h3>
+
+			<label class="checkboxfield-label" ng-if="user.tags.includes('developer')">
+				<input
+				  type="checkbox"
+					ng-model="new_user_tags.developer"
+					ng-true-value="'developer'"
+				>
+				<span>Developer</span>
+			</label>
+
+			<label class="checkboxfield-label">
+				<input
+				  type="checkbox"
+					ng-model="new_user_tags.publisher"
+					ng-true-value="'publisher'"
+				>
+				<span>Publisher</span>
+			</label>
+
+			<label class="checkboxfield-label">
+				<input
+					type="checkbox"
+					ng-model="new_user_tags.admin"
+					ng-true-value="'admin'"
+				>
+				<span>Admin</span>
+			</label>
+
+			<div class="clearfix"></div>
+			<div class="wedge"></div>
+			<div class="submit-button btn" ng-click="add_user_submit()">
+				Submit
+				<i class="fa fa-gear fa-pulse" ng-class="{ 'hidden': !adding }"></i>
+			</div>
+			<div class="cancel-button btn" ng-click="add_user_cancel()">Cancel</div>
+		</form>
+
+		<table ng-if="!confirming_delete && !editing_user && !new_user">
+			<head>
+				<tr>
+					<th class="username">Username</th>
+					<th clsas="roles">Roles</th>
+					<th></th>
+				</tr>
+			</head>
+			<tbody>
+				<tr
+					ng-repeat="u in users"
+					ng-if="!u.tags.includes('developer') || user.tags.includes('developer') && u.tags.includes('developer')"
+				>
+					<td class="username">
+						<a
+							ng-if="!u.tags.includes('developer')"
+							data-username="{{u.username}}"
+							ng-click="edit_user($event)"
+							ngtooltipster
+							title="Edit user"
+						>
+							{{u.username}}
+						</a>
+						<span ng-if="u.tags.includes('developer')">{{u.username}}</span>
+					</td>
+					<td class="roles">
+						<span ng-if="u.tags.includes('developer')">Developer</span>
+						<span ng-if="u.tags.includes('publisher')">Publisher</span>
+						<span ng-if="u.tags.includes('admin')">Admin</span>
+					</td>
+					<td class="actions">
+						<i
+							ng-if="!u.tags.includes('developer')"
+							data-username="{{u.username}}"
+							ng-click="confirm_delete($event)"
+							class="fa fa-user-times"
+							ngtooltipster
+							title="Delete"
+						></i>
+					</td>
+				</tr>
+			</tbody>
+		</ul>
+	</div>
+</div>

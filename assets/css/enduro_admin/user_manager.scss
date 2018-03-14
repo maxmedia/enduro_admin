@@ -1,0 +1,103 @@
+.user-manager {
+  h2 small.loading {
+    font-style: italic;
+    text-transform: uppercase;
+    @include font-size(sm);
+    padding-left: 0.5em;
+
+    i.fa-refresh {
+      margin-left: 0.5em;
+    }
+  }
+
+  .fa-user-plus {
+    padding-left: 0.5em;
+    cursor: pointer;
+  }
+
+  table {
+    th {
+      &.username {
+        min-width: 10em;
+      }
+      &.roles {
+        min-width: 10em;
+      }
+
+    }
+    td {
+      padding: 0 1em 0 0;
+
+      &.username {
+        font-family: monospace;
+        min-width: 10em;
+        cursor: pointer;
+      }
+
+      &.roles {
+        min-width: 10em;
+
+        span {
+          margin: 0 0.5em;
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .confirmation {
+    div.warning {
+      float: left;
+      p {
+        @include font-size(sm);
+        font-weight: bold;
+        color: #f00;
+        margin-bottom: 0;
+      }
+      .username {
+        font-family: monospace;
+        color: black;
+        font-size: 110%;
+      }
+    }
+    .delete-button, .cancel-button {
+      // text-align: right;
+      float: right;
+      margin: {
+        left: 0.5em;
+        right: 0.5em;
+        bottom: 0;
+      }
+    }
+  }
+
+  form.edit-user, form.add-user {
+    h3 {
+      font-weight: bold;
+    }
+    .form-row {
+      float: left;
+      width: 50%;
+      padding-bottom: 1em;
+      input {
+        width: 90%;
+      }
+    }
+    label.textfield-label {
+      width: 100%;
+      clear: both;
+      font-weight: bold;
+    }
+    label.checkboxfield-label {
+      width: 100%;
+      clear: both;
+    }
+  }
+
+  .btn .fa-gear.fa-pulse {
+    padding: 0 0 0 0.3em;
+    margin: 0 0.15em;
+  }
+}
