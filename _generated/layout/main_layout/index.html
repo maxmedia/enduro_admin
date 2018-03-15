@@ -107,7 +107,7 @@
 				<a
 					ng-click="manage_users()"
 					ng-if="!settings.juicebox_enabled"
-					ng-disabled="!$rootScope.user.tags.includes('admin')"
+					ng-disabled="!user.tags.includes('admin')"
 					ngtooltipster
 					title="Manage Users"
 				>
