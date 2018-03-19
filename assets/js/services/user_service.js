@@ -66,7 +66,7 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 	}
 
 	service.add_user = function (user) {
-		return $http.post(url_config.get_base_url() + 'users/' + user.username, user)
+		return $http.post(url_config.get_base_url() + 'users', user)
 			.then(function (res) {
 				if (!res.data.success) throw new Error('Failed to add user')
 				return res.data.user
