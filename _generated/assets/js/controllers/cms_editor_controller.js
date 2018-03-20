@@ -98,6 +98,10 @@ enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$
 		// *	returns nothing
 		// * ———————————————————————————————————————————————————————— * //
 		$scope.publish = function () {
+			if (!$rootScope.user.tags.includes('publisher')) {
+				return
+			}
+
 			$scope.publishing = true
 
 			modal_service.open('publishing_modal')
