@@ -21,7 +21,8 @@ enduro_admin_app.factory('user_service', ['$http', 'url_config', '$cookies', '$q
 	service.error_without_reject = function (err) {
 		// session expired
 		if (err.status == 401) {
-			return modal_service.open('login_modal')
+			window.location.assign('/admin/#!/login')
+			return
 		}
 
 		// does not have enough access rights
