@@ -5,6 +5,50 @@
 enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$routeParams', 'content_service', 'culture_service', 'hotkeys', 'modal_service',
 	function ($scope, $rootScope, $routeParams, content_service, culture_service, hotkeys, modal_service) {
 
+		// adding hotkeys
+		var hotkeys_handler = hotkeys.bindTo($scope)
+
+		hotkeys_handler
+			.add({
+				// publish hotkey
+				combo: ['mod+s', 'mod+enter'],
+				description: 'Publish current page',
+				allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+				callback: function (e) {
+					e.preventDefault()
+					$scope.publish()
+				}
+			})
+			.add({
+				// temp hotkey
+				combo: ['mod+d', 'mod+t'],
+				description: 'Temp current page',
+				allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+				callback: function (e) {
+					e.preventDefault()
+					$scope.temp()
+				}
+			})
+			.add({
+				// search for page hotkey
+				combo: ['mod+p'],
+				description: 'Search for page',
+				allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+				callback: function (e) {
+					e.preventDefault()
+					$('.page-search-input').focus()
+				}
+			})
+			.add({
+				// search for page hotkey
+				combo: ['mod+l'],
+				description: 'log context',
+				callback: function (e) {
+					e.preventDefault()
+					console.log($scope.context)
+				}
+			})
+
 		// get page specified in route
 		content_service.get_content($rootScope.current_page)
 			.then(function (res) {
@@ -166,49 +210,4 @@ enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$
 			}
 			return false
 		}
-
-		// adding hotkeys
-		var hotkeys_handler = hotkeys.bindTo($scope)
-
-		hotkeys_handler
-			.add({
-				// publish hotkey
-				combo: ['mod+s', 'mod+enter'],
-				description: 'Publish current page',
-				allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
-				callback: function (e) {
-					e.preventDefault()
-					$scope.publish()
-				}
-			})
-			.add({
-				// temp hotkey
-				combo: ['mod+d', 'mod+t'],
-				description: 'Temp current page',
-				allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
-				callback: function (e) {
-					e.preventDefault()
-					$scope.temp()
-				}
-			})
-			.add({
-				// search for page hotkey
-				combo: ['mod+p'],
-				description: 'Search for page',
-				allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
-				callback: function (e) {
-					e.preventDefault()
-					$('.page-search-input').focus()
-				}
-			})
-			.add({
-				// search for page hotkey
-				combo: ['mod+l'],
-				description: 'log context',
-				callback: function (e) {
-					e.preventDefault()
-					console.log($scope.context)
-				}
-			})
-
 	}])
