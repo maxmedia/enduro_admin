@@ -126,6 +126,7 @@ enduro_admin_app.controller('cms-editor-controller', ['$scope', '$rootScope', '$
 				.then(function (new_context) {
 					if (new_context) {
 						$scope.context = new_context
+						window.location.reload()
 					}
 					content_service.update_outstanding_changes()
 					$scope.saving = false
