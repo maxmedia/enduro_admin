@@ -20,8 +20,15 @@ enduro_admin_app.controller('image_controller', function ($scope, image_service,
 			file = file[0]
 			file.name = Math.random().toString(36).substring(7) + '.' + file.type.match(/\/(.*)$/)[1]
 		}
+
+		var metadata = {}
+		var image_magick_metadata = $scope.context[ $scope.terminatedkey + '_image_magick' ]
+		if (image_magick_metadata) {
+			metadata['image_magick'] = image_magick_metadata
+		}
+
 		$timeout(function () {
-			image_service.upload_image(file, $scope.progress_update)
+			image_service.upload_image(file, metadata)
 				.then(function (image_url) {
 					$scope.context[$scope.terminatedkey] = image_url
 					$timeout(function () { $scope.loading = false }, 500)

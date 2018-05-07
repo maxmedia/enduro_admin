@@ -1,10 +1,28 @@
 enduro_admin_app.factory('image_service', ['url_config', '$cookies', '$q', 'Upload', 'user_service', function image_service (url_config, $cookies, $q, Upload, user_service) {
 	var image_service = {}
 
-	image_service.upload_image = function (file) {
+	image_service.upload_image = function (file, metadata) {
+		var url = url_config.get_base_url() + 'img_upload'
+		var url_search = []
+
+		if (metadata) {
+			for (var key in metadata) {
+				if (metadata.hasOwnProperty(key)) {
+					url_search.push([
+						encodeURIComponent(key),
+						encodeURIComponent(metadata[key])
+					].join('='))
+				}
+			}
+
+			if (url_search.length) {
+				url = url + '?' + url_search.join('&')
+			}
+		}
+
 		return $q(function (resolve, reject) {
 			Upload.upload({
-				url: url_config.get_base_url() + 'img_upload',
+				url: url,
 				data: {
 					file: file
 				}
